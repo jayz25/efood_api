@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Restaurent
-from .serializers import RestaurentSerializer, DishesSerializer
+from .models import Restaurent, Menu, Dish
+from .serializers import RestaurentSerializer, DishesSerializer, MenuSerializer
 from rest_framework import status
 
 @api_view(['GET'])
@@ -39,3 +39,22 @@ def addDishes(request):
         dishes.save()
         return Response(dishes.data, status=status.HTTP_201_CREATED)
     return Response(dishes.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def getRestaurentById(request, id):
+    restaurent = Restaurent.objects.filter(id=id)
+    # Find out why do we get querySet name error when we try to use many=False here
+    serialized_restaurent = RestaurentSerializer(restaurent, many=True)
+    return Response(serialized_restaurent.data)
+
+@api_view(['GET'])
+def getMenuById(request, id):
+    menu = Menu.objects.filter(id=id)
+    serialized_menu = MenuSerializer(menu, many=True)
+    return Response(serialized_menu.data)
+
+@api_view(['GET'])
+def getDishById(request, id):
+    dish = Dish.objects.filter(id=id)
+    serialized_dish = DishesSerializer(dish, many=True)
+    return Response(serialized_dish.data)
