@@ -9,4 +9,5 @@ urlpatterns = [
     path('dishes/getSingle/<str:id>/', views.getDishById),
     path('restaurents/getSingle/<str:id>/', views.getRestaurentById),
     path('menu/<str:id>/', views.getMenuById),
+    path('cuisines/', views.getCuisines),
 ]

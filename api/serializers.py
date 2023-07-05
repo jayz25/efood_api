@@ -15,3 +15,8 @@ class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Menu
         fields = '__all__'
+
+class CuisineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Cuisine
+        fields = '__all__'

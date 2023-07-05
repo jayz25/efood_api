@@ -4,7 +4,9 @@ import uuid
 
 class Cuisine(models.Model):
     cuisine = models.CharField(primary_key=True, max_length=150)
-
+    logo_url = models.URLField(default="", null=True, blank=True)
+    is_displaying = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.cuisine
 

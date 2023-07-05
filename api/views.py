@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Restaurent, Menu, Dish
-from .serializers import RestaurentSerializer, DishesSerializer, MenuSerializer
+from .models import Restaurent, Menu, Dish, Cuisine
+from .serializers import RestaurentSerializer, DishesSerializer, MenuSerializer, CuisineSerializer
 from rest_framework import status
 
 @api_view(['GET'])
@@ -58,3 +58,9 @@ def getDishById(request, id):
     dish = Dish.objects.filter(id=id)
     serialized_dish = DishesSerializer(dish, many=True)
     return Response(serialized_dish.data)
+
+@api_view(['GET'])
+def getCuisines(request):
+    cuisines = Cuisine.objects.filter(is_displaying=True)
+    serialized_cuisines = CuisineSerializer(cuisines, many=True)
+    return Response(serialized_cuisines.data)
